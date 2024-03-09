@@ -3,12 +3,15 @@ const userModel = require("../models/Users");
 const bcrypt = require("bcrypt");
 const getServices = async (req, res) => {
   try {
-    console.log(req.params.userId)
-    if (req.params.userId=='all') {
-      const providers = await userModel.find({
-        isProvider: true,
-        "service.availability.isAvailable": true,
-      });
+    console.log(req.params.userId);
+    if (req.params.userId == "all") {
+      const providers = await userModel
+        .find({
+          isProvider: true,
+          "service.availability.isAvailable": true,
+        })
+        .select("-password");
+
       res.json(providers);
     } else {
       const user = await userModel.findById(req.params.userId);
@@ -23,20 +26,17 @@ const getServices = async (req, res) => {
   }
 };
 
-
 const removeUser = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await userModel.findByIdAndDelete(userId);
-    
+
     res.json("user removed succsefuly");
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error " + error });
   }
 };
-
-
 
 const updateUser = async (req, res) => {
   try {
@@ -53,8 +53,8 @@ const updateUser = async (req, res) => {
       case "phoneNumber":
         user.phoneNumber = {
           number: req.body.phoneNumber,
-          code :  code()
-        }
+          code: code(),
+        };
         break;
       case "password":
         const cryptedPassword = bcrypt.hashSync(req.body.password, 10);
@@ -70,10 +70,10 @@ const updateUser = async (req, res) => {
         user.numberOfUsers = req.body.numberOfUsers;
         break;
       case "email":
-        user.email ={
+        user.email = {
           emailAddress: req.body.email,
-          code :  Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000,
-        } 
+          code: Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000,
+        };
         break;
       case "serviceName":
         user.serviceName = req.body.serviceName;
@@ -95,5 +95,5 @@ const updateUser = async (req, res) => {
 module.exports = {
   getServices,
   updateUser,
-  removeUser
+  removeUser,
 };

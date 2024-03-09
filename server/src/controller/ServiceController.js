@@ -31,13 +31,13 @@ const emproveAccount = async (req, res) => {
       code: code()
     };
     user.service = {
-      email: Email,
       certification,
       serviceName,
       description,
       experience,
    
     };
+    user.email =Email
 
     await user.save();
 
