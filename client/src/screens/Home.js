@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
-import useServices from '../hooks/useServices';
+import useGet from '../hooks/useGet.js';
+import Card from '../component/Card.js';
 
 
 const Home = () => {
-  const { data, loading, error } = useServices('/users');
+  const { data, loading, error } = useGet('/users/all');
 
   if (loading) {
     return <ActivityIndicator size="large" />;
@@ -16,7 +17,10 @@ const Home = () => {
 
   return (
     <View>
-      {data && <Text>{data[0].phoneNumber.number}</Text>}
+      
+      {data.message ? (<Text>EORRR</Text>) : data.map((item, index) => (
+        <Card key={index} data={item} /> 
+      ))}
     </View>
   );
 };
