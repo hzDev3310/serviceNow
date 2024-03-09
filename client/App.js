@@ -1,11 +1,11 @@
 import React from 'react'
-import Home from './src/screens/Home'
+import HomeScreen from './src/screens/HomeScreen'
 import { Text } from 'react-native'
 
 const App = () => {
   return (
     <>
-    <Home />
+    <HomeScreen />
     </>
   )
 }
