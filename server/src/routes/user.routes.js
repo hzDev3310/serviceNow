@@ -8,7 +8,7 @@ const {
   
   const router = require("express").Router();
 
-  router.get("/", getServices);
+  router.get("/:userId", getServices);
   router.post("/:userId", emproveAccount);
   router.delete("/:userId", removeUser);
   router.put("/:userId/:attribute", updateUser);

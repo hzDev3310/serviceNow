@@ -6,6 +6,22 @@ const Comment = new Schema({
   content: String,
 });
 
+const Rating = new Schema({
+  total: {
+    type: Number,
+    default: 0,
+  },
+  numberOfUsers: {
+    type: Number,
+    default: 0,
+  },
+  average: {
+    type: Number,
+    default: function () {
+      return this.total / this.numberOfUsers || 0;
+    },
+  },
+});
 const PhoneNumber = new Schema({
   number: String,
   code: Number,
@@ -38,10 +54,6 @@ const Location = new Schema({
 });
 
 const Service = new Schema({
-  email: {
-    type: Mail,
-    required: true,
-  },
   certification: {
     type: String,
     default: "",
@@ -51,13 +63,14 @@ const Service = new Schema({
     required: true,
   },
   rating: {
-    type: Number,
-    default: 0,
+    type: Rating,
+    default: {
+      total: 0,
+      numberOfUsers: 0,
+      average: 0,
+    },
   },
-  numberOfUsers: {
-    type: Number,
-    default: 0,
-  },
+
   description: {
     type: String,
     default: "",
@@ -69,7 +82,6 @@ const Service = new Schema({
       from: 1,
       to: 7,
     },
-    required: false,
   },
   comments: {
     type: [Comment],
@@ -104,6 +116,9 @@ const userSchema = new Schema({
   isProvider: {
     type: Boolean,
     default: false,
+  },
+  email: {
+    type: Mail,
   },
   service: {
     type: Service,

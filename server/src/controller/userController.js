@@ -3,22 +3,32 @@ const userModel = require("../models/Users");
 const bcrypt = require("bcrypt");
 const getServices = async (req, res) => {
   try {
-    const providers = await userModel.find({
-      isProvider: true,
-      "service.availability.isAvailable": true,
-    });
-
-    res.json(providers);
+    console.log(req.params.userId)
+    if (req.params.userId=='all') {
+      const providers = await userModel.find({
+        isProvider: true,
+        "service.availability.isAvailable": true,
+      });
+      res.json(providers);
+    } else {
+      const user = await userModel.findById(req.params.userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res.json(user);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error " + error });
   }
 };
 
+
 const removeUser = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await userModel.findByIdAndDelete(userId);
+    
     res.json("user removed succsefuly");
   } catch (error) {
     console.error(error);

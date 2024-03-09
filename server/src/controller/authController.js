@@ -16,7 +16,8 @@ const signup = async (req, res) => {
         name,
         phoneNumber: {
           number,
-          code: code()
+          code: code(),
+          isVerifiate : false
         },
         password: cryptedPassword,
         location,

@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './src/screens/Home';
+import React from 'react';
+import { View, Button, Text } from 'react-native';
+import useDelete from './src/hooks/useDelete';
 
+function App() {
+  const { deleteData, loading, error } = useDelete('/users/65eb8ccba1e6f8b874b3a740');
 
-export default function App() {
+  const handleDelete = async () => {
+
+    await deleteData();
+  };
+
+  if (loading) return <View><Text>Loading...</Text></View>;
+  if (error) return <View><Text>Error: {JSON.stringify(error)}</Text></View>;
+
   return (
-    <View style={styles.container}>
-      <Home />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      {/* Your delete button */}
+      <Button title="Delete Data" onPress={handleDelete} />
+      
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
