@@ -4,7 +4,7 @@ import useGet from '../hooks/useGet.js';
 import Card from '../component/Card.js';
 
 
-const Home = () => {
+const Home = ({navi}) => {
   const { data, loading, error } = useGet('/users/all');
 
   if (loading) {
