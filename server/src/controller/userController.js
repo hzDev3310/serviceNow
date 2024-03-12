@@ -3,7 +3,7 @@ const userModel = require("../models/Users");
 const bcrypt = require("bcrypt");
 const getServices = async (req, res) => {
   try {
-    console.log(req.params.userId);
+    
     if (req.params.userId == "all") {
       const providers = await userModel
         .find({
