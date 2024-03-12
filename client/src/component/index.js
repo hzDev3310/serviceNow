@@ -1,2 +1,3 @@
-export {default as Card} from './Card';
+export {default as Card} from './AppCard';
+export {default as Navbar} from './Navbar';
 

@@ -1,39 +1,24 @@
 import * as React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { GluestackUIProvider} from "@gluestack-ui/themed";
-import { config } from "@gluestack-ui/config";
+import { Navbar } from "./src/component";
+import { ServiceProviderScreen } from "./src/screens";
+import { PaperProvider } from "react-native-paper";
 
-import { LoginScreen, SignupScreen, HomeScreen } from "./src/screens/index.js";
+const Stack = createStackNavigator();
 
-const Stack = createNativeStackNavigator();
-
-const App = () => {
+function App() {
   return (
-    <GluestackUIProvider config={config}>
+    <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ title: "HomeScreen" }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ title: "LoginScreen" }}
-          />
-          <Stack.Screen
-            name="Signup"
-            component={SignupScreen}
-            options={{ title: "SignupScreen" }}
-          />
+          <Stack.Screen name="Navbar" component={Navbar} />
+          <Stack.Screen name="ServiceProviderScreen" component={ServiceProviderScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </GluestackUIProvider>
+    </PaperProvider>
   );
-};
+}
 
 export default App;
-

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import useGet from '../hooks/useGet.js';
-import Card from '../component/Card.js';
+import Card from '../component/AppCard.js';
 
 
 const Home = ({navi}) => {
@@ -17,7 +17,7 @@ const Home = ({navi}) => {
 
   return (
     <View>
-      
+     
       {data.message ? (<Text>EORRR</Text>) : data.map((item, index) => (
         <Card key={index} data={item} /> 
       ))}
