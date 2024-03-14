@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Avatar, Button, Card, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
-import { HomeScreen } from '../screens';
+
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 const AppCard = ({ data }) => {
-  const navigation = useNavigation(); // Hook to access navigation object
+  const navigation = useNavigation(); 
 
   const service = data.service;
 

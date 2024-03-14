@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import api from './apiClient';
 
+
 function usePost(endpoint) {
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [responseData, setResponseData] = useState(null);
@@ -19,6 +21,7 @@ function usePost(endpoint) {
       });
       const result = await response.json();
       setResponseData(result);
+    
     } catch (error) {
       setError(error.message);
     } finally {

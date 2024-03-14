@@ -1,8 +1,12 @@
-import { create } from 'zustand'
+import create from 'zustand';
 
-const useId = create((set) => ({
-  id: '',
-  setId: (newID) => set(() => ({ id: newID })),
-}))
+const useLogin = create((set) => ({
+  isLogin: false,
 
-export { useId }
+  setLogin: () =>
+    set((state) => ({
+      isLogin: !state.isLogin,
+    })),
+}));
+
+export  {useLogin};

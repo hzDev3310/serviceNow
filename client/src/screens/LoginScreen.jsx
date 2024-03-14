@@ -8,20 +8,20 @@ import {
   StyleSheet,
 } from "react-native";
 import usePost from "../hooks/usePost";
+import { useLogin } from "../store";
 
 const LoginScreen = () => {
+  const { setLogin, isLogin } = useLogin();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { postData, loading, error, responseData } = usePost("/auth/login");
 
   const handleLogin = () => {
-    // Make sure username and password are not empty
     if (username.trim() === "" || password.trim() === "") {
-      setError("Username and password are required");
+      alert("errer");
       return;
     }
 
-    // Call postData function with login credentials
     postData({ phoneNumber: username, password });
   };
 

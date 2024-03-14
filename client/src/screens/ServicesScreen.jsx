@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import useGet from '../hooks/useGet.js';
-import Card from '../component/AppCard.js';
+import Card from '../component/AppCard.jsx';
 
 
-const Home = ({navi}) => {
+const ServicesScreen = ({navi}) => {
   const { data, loading, error } = useGet('/users/all');
 
   if (loading) {
@@ -25,4 +25,4 @@ const Home = ({navi}) => {
   );
 };
 
-export default Home;
+export default ServicesScreen;

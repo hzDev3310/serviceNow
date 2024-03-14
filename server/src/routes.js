@@ -7,11 +7,11 @@ const imageRouter = require('./routes/image.routes')
 const router = express();
 
 router.use(express.json());
-router.use(express.json());
 
 
 router.use("/users", userRouter)
 router.use("/admin", adminRouter)
 router.use("/image", imageRouter)
 router.use("/auth", authRouter)
+
 module.exports = router;
