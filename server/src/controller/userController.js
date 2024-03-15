@@ -1,25 +1,33 @@
 const code = require("../services/verificationCode");
 const userModel = require("../models/Users");
 const bcrypt = require("bcrypt");
+const calculateDistance = require("../services/calculateDistance");
 const getServices = async (req, res) => {
   try {
-    
-    if (req.params.userId == "all") {
-      const providers = await userModel
-        .find({
-          isProvider: true,
-          "service.availability.isAvailable": true,
-        })
-        .select("-password");
+    const { latitude, longitude } = req.body; 
 
-      res.json(providers);
-    } else {
-      const user = await userModel.findById(req.params.userId);
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-      return res.json(user);
-    }
+    let services = await userModel.find({}); 
+
+    services.sort((a, b) => b.service.rating.average - a.service.rating.average);
+
+  
+    services.sort((a, b) => {
+      const distanceToA = calculateDistance(
+        latitude,
+        longitude,
+        parseFloat(a.location.latitude),
+        parseFloat(a.location.longitude)
+      );
+      const distanceToB = calculateDistance(
+        latitude,
+        longitude,
+        parseFloat(b.location.latitude),
+        parseFloat(b.location.longitude)
+      );
+      return distanceToA - distanceToB;
+    });
+
+    res.json(services);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error " + error });

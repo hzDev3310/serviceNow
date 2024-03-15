@@ -1,12 +1,14 @@
-import * as React from "react";
-import { BottomNavigation, Text } from "react-native-paper";
-import { ServicesScreen, ChatScreen, ProfilScreen } from ".";
 
-const HomeRoute = () => <ServicesScreen />;
+import React from "react";
+import { BottomNavigation } from "react-native-paper";
+import { HomeScreen, ChatScreen, ProfilScreen } from "./";
+import Text from 'react-native';
+
+const HomeRoute = () => <HomeScreen />;
 
 const chatRoute = () => <ChatScreen />;
 
-const notifcationRoute = () => <Text>notif</Text>;
+const notificationRoute = () => <Text>notif</Text>;
 const profilRoute = () => {
   return <ProfilScreen />;
 };
@@ -14,17 +16,17 @@ const profilRoute = () => {
 const NavigationScreen = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "profil", title: "profil", focusedIcon: "account" },
     { key: "home", title: "home", focusedIcon: "home" },
+    { key: "profil", title: "profil", focusedIcon: "account" },
     { key: "chat", title: "chat", focusedIcon: "chat" },
-    { key: "notfication", title: "notifcation", focusedIcon: "bell" },
+    { key: "notification", title: "notification", focusedIcon: "bell" },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
     profil: profilRoute,
     chat: chatRoute,
-    notfication: notifcationRoute,
+    notification: notificationRoute,
   });
 
   return (
@@ -37,3 +39,4 @@ const NavigationScreen = () => {
 };
 
 export default NavigationScreen;
+

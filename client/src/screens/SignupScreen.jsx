@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import usePost from "../hooks/usePost";
 
-const SingupScreen = () => {
+const SignupScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SingupScreen;
+export default SignupScreen;

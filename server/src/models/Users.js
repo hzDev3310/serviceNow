@@ -49,8 +49,8 @@ const Availability = new Schema({
   to: Number,
 });
 const Location = new Schema({
-  city: String,
-  citys: [String],
+  latitude: Number,
+  longitude: Number,
 });
 
 const Service = new Schema({

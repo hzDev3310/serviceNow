@@ -9,8 +9,10 @@ import {
 } from "react-native";
 import usePost from "../hooks/usePost";
 import { useLogin } from "../store";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
+  const navigation = useNavigation(); 
   const { setLogin, isLogin } = useLogin();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +45,10 @@ const LoginScreen = () => {
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
+       <>
         <Button title="Login" onPress={handleLogin} />
+        <Button title="singup"onPress={() => { navigation.navigate('SignupScreen') }} />
+       </>
       )}
       {error && console.log(error) && <Text style={styles.error}>{error}</Text>}
       {responseData && (

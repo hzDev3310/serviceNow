@@ -1,31 +1,49 @@
-import * as React from 'react';
-import { Avatar, Button, Card, Text, TouchableRipple } from 'react-native-paper';
+import * as React from "react";
+import {
+  Avatar,
+  Button,
+  Card,
+  Text,
+  TouchableRipple,
+} from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import { Image, View } from "react-native";
 
-
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const AppCard = ({ data }) => {
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const service = data.service;
 
   return (
-    <TouchableRipple onPress={() => { console.log("ok") }}>
-      <Card>
-        <Card.Title title={service.serviceName} subtitle="Card Subtitle" left={LeftContent} />
-        <Card.Content>
-          <Text variant="titleLarge">name:</Text>
-          <Text variant="bodyMedium">{data.name}</Text>
-        </Card.Content>
-        <Card.Cover source={{ uri: data.profilPic }} />
-        <Card.Actions>
-          <Button>Cancel</Button>
-          <Button onPress={() => { navigation.navigate('ServiceProviderScreen', { data: data }) }}>Ok</Button>
-        </Card.Actions>
-      </Card>
+    <TouchableRipple
+      onPress={() => {
+        navigation.navigate("ServiceProviderScreen", { data: data });
+      }}
+    >
+      <View
+        style={{
+          margin: 10,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          border : 2,
+          borderColor : "rgb(0, 0, 0)",
+          borderWidth : 2,
+          padding :20
+        }}
+      >
+        <Image source={{ uri: data.profilPic }} width={100} height={100} />
+        <View>
+          <Text>name : {data.name}</Text>
+          <Text>service : {data.service.serviceName}</Text>
+          <Text>location : {data.location.city}</Text>
+          <Text>name : {data.phoneNumber.number}</Text>
+        </View>
+      </View>
     </TouchableRipple>
   );
-}
+};
 
 export default AppCard;
