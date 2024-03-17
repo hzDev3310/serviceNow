@@ -8,7 +8,7 @@ const {
   
   const router = require("express").Router();
 
-  router.post("/", getServices);
+  router.get("/:latitude/:longitude", getServices);
   router.post("/:userId", emproveAccount);
   router.delete("/:userId", removeUser);
   router.put("/:userId/:attribute", updateUser);

@@ -2,15 +2,22 @@ const code = require("../services/verificationCode");
 const userModel = require("../models/Users");
 const bcrypt = require("bcrypt");
 const calculateDistance = require("../services/calculateDistance");
+
 const getServices = async (req, res) => {
   try {
-    const { latitude, longitude } = req.body; 
+    if (!req.params) {
+      // Return services without sorting if latitude and longitude are not provided
+      const services = await userModel.find({ isProvider: true }).select('-password');
+      res.json(services);
+      return;
+    }
 
-    let services = await userModel.find({}); 
+    const { latitude, longitude } = req.params;
+
+    let services = await userModel.find({isProvider:true}).select('-password');
 
     services.sort((a, b) => b.service.rating.average - a.service.rating.average);
 
-  
     services.sort((a, b) => {
       const distanceToA = calculateDistance(
         latitude,
@@ -33,6 +40,7 @@ const getServices = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error " + error });
   }
 };
+
 
 const removeUser = async (req, res) => {
   try {
