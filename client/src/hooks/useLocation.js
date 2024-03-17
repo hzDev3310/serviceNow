@@ -1,8 +1,14 @@
 import * as Location from "expo-location";
-import { useCity } from "../store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 
 const useLocation = () => {
+  const [locationData, setLocationData] = useState({
+    latitude: null,
+    longitude: null,
+    cityName: null,
+  });
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -15,8 +21,17 @@ const useLocation = () => {
       let { latitude, longitude } = location.coords;
 
       let address = await Location.reverseGeocodeAsync({ latitude, longitude });
-      useCity.setState({ cityName: address[0].city });
+      const cityName = address[0].city;
+
+      setLocationData({
+        latitude,
+        longitude,
+        cityName
+      });
     })();
   }, []);
+
+  return {locationData};
 };
+
 export default useLocation;

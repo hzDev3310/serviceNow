@@ -51,6 +51,7 @@ const Availability = new Schema({
 const Location = new Schema({
   latitude: Number,
   longitude: Number,
+  cityName: String,
 });
 
 const Service = new Schema({
@@ -96,15 +97,14 @@ const Service = new Schema({
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true,
   },
   phoneNumber: {
     type: PhoneNumber,
     required: true,
   },
   password: {
-    type: String,
-    required: true,
+    type: String
+
   },
   profilPic: {
     type: String,
