@@ -47,7 +47,7 @@ const LoginScreen = () => {
       ) : (
        <>
         <Button title="Login" onPress={handleLogin} />
-        <Button title="singup"onPress={() => { navigation.navigate('SignupScreen') }} />
+        <Button title="singup"onPress={() => { navigation.navigate('signup') }} />
        </>
       )}
       {error && console.log(error) && <Text style={styles.error}>{error}</Text>}
