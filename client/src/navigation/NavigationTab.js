@@ -13,18 +13,18 @@ const NavigationTab = () => {
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }} />
+        <Tab.Screen  name="Chat"
+          component={ChatStack}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="chat" color={color} size={26} />
+            ),
+          }}/>
       <Tab.Screen  name="Account"
         component={AccountStack}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
-          ),
-        }}/>
-      <Tab.Screen  name="Chat"
-        component={ChatStack}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="chat" color={color} size={26} />
           ),
         }}/>
     </Tab.Navigator>

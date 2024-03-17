@@ -1,11 +1,18 @@
-import React from 'react';
-import { Text } from 'react-native-paper';
+import React from "react";
+import { Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const ServiceProviderScreen = ({ route }) => {
   const { data } = route.params;
+  const navigation = useNavigation();
 
   return (
-    <Text>{JSON.stringify(data)}</Text>
+    <>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text>Go Back</Text>
+      </TouchableOpacity>
+      <Text>{JSON.stringify(data)}</Text>
+    </>
   );
 };
 

@@ -2,19 +2,17 @@ import React, { useEffect } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 
 import Card from "../component/AppCard.jsx";
-import usePost from "../hooks/usePost.js";
+
 import useLocation from "../hooks/useLocation.js";
+import useGet from "../hooks/useGet.js";
 
 const ServicesScreen = () => {
-  const { data, loading, error, postData } = usePost("/users"); 
   const {locationData} = useLocation();
+  const lat = locationData.latitude;
+  const long = locationData.longitude;
+  const { data, loading, error,  } = useGet(`/users/${lat}/${long}`); 
 
-  useEffect(() => {
-    postData({
-      latitude: locationData.latitude,
-      longitude: locationData.longitude,
-    });
-  }, []);
+
 
   if (loading) {
     return <ActivityIndicator size="large" />;
