@@ -4,7 +4,7 @@ import { View, Text, ActivityIndicator } from "react-native";
 import Card from "../component/AppCard.jsx";
 
 import useLocation from "../hooks/useLocation.js";
-import useGet from "../hooks/useGet.js";
+import useGet from "../apis/useGet.js";
 
 const ServicesScreen = () => {
   const {locationData} = useLocation();

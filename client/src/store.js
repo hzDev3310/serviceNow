@@ -1,19 +1,12 @@
 import { create } from "zustand";
 
-const useLogin = create((set) => ({
-  isLogin: false,
 
-  setLogin: () =>
-    set((state) => ({
-      isLogin: state,
-    })),
-}));
 
-const  useUserID = create((set) => ({
+
+const useUserID = create((set) => ({
   id: '',
   setId: (id) => set({ id })
 }));
-
 const useCity = create((set) => ({
   cityName: "",
   setCityName: (cityName) => set({ cityName }),
@@ -32,4 +25,4 @@ const useNotif = create((set) => ({
 export default useNotif;
 
 
-export { useCity, useLogin, useNotif , useUserID};
+export { useCity, useNotif , useUserID};

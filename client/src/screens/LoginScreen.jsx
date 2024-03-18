@@ -1,88 +1,17 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  ActivityIndicator,
-  StyleSheet,
-} from "react-native";
-import usePost from "../hooks/usePost";
-import { useLogin, useUserID } from "../store";
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import useLogin from "../hooks/useLogin";
+import { Button, Text } from "react-native-paper";
 
 const LoginScreen = () => {
-  const navigation = useNavigation(); 
-  const {setId , id}  = useUserID()
-  const { setLogin, isLogin } = useLogin();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const {postData, loading, error, data } = usePost("/auth/login");
-
-  const handleLogin = () => {
-    if (username.trim() === "" || password.trim() === "") {
-      alert("errer");
-      return;
-    }
-  
-
-    postData({ phoneNumber: username, password });
-    setLogin(true);
-    setId(data.userID);
-    console.log(`data : ${data}`);
-    console.log(`id : ${id}`);
-  };
-
+  const { error, loading, handleLogin } = useLogin("26284497", "123456");
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        onChangeText={setUsername}
-        value={username}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry
-      />
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-       <>
-        <Button title="Login" onPress={handleLogin} />
-        <Button title="singup"onPress={() => { navigation.navigate('signup') }} />
-       </>
-      )}
-      {error && console.log(error) && <Text style={styles.error}>{error}</Text>}
-      {data && (
-        <Text>Login Successful</Text>
-      )}
-    </View>
+    <>
+      
+      <Text>{JSON.stringify(error)}</Text>
+      <Text>{JSON.stringify(loading)}</Text>
+      <Button onPress={handleLogin} >login</Button>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  input: {
-    height: 40,
-    width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  error: {
-    color: "red",
-    marginTop: 10,
-  },
-});
 
 export default LoginScreen;

@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from "react-native";
-import usePost from "../hooks/usePost";
+import usePost from "../apis/usePost";
 
 const SignupScreen = () => {
   const [username, setUsername] = useState("");

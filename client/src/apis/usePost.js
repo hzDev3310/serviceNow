@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import api from './apiClient';
 
-function usePost(endpoint) {
+
+
+const usePost = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [responseData, setResponseData] = useState([]);
 
-  const url = `${api}${endpoint}`;
-
-  const postData = async (data) => {
+  const postData = async (endpoint, data) => {
+    const url = `${api}${endpoint}`;
     setLoading(true);
     setError(null);
     try {
@@ -19,9 +20,6 @@ function usePost(endpoint) {
         },
         body: JSON.stringify(data),
       });
-      if (!response.ok) { // Check if response is not OK
-        throw new Error('Failed to fetch');
-      }
       const result = await response.json();
       setResponseData(result);
     } catch (error) {
@@ -31,7 +29,7 @@ function usePost(endpoint) {
     }
   };
 
-  return { postData, loading, error, data :responseData};
+  return { postData, loading, error, responseData };
 }
 
-export default usePost;
+export default usePost

@@ -1,12 +1,9 @@
 import React from "react";
-import { IconButton, Text } from "react-native-paper";
-import useNotif from "../store";
+import { Text } from "react-native-paper";
 
 const NotifcationSceen = () => {
-  const { setNotif } = useNotif();
   return (
     <>
-  
       <Text>notif</Text>
     </>
   );
