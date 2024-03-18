@@ -13,11 +13,7 @@ function useGet(endpoint) {
         const response = await fetch(url);
 
         const result = await response.json();
-        if (response.message) {
-          setError(response.message);
-        } else {
-          setData(result);
-        }
+        setData(result);
       } catch (error) {
         setError(error.message);
       } finally {
