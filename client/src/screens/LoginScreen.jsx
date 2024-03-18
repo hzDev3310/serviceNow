@@ -8,23 +8,29 @@ import {
   StyleSheet,
 } from "react-native";
 import usePost from "../hooks/usePost";
-import { useLogin } from "../store";
+import { useLogin, useUserID } from "../store";
 import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const navigation = useNavigation(); 
+  const {setId , id}  = useUserID()
   const { setLogin, isLogin } = useLogin();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { postData, loading, error, responseData } = usePost("/auth/login");
+  const {postData, loading, error, data } = usePost("/auth/login");
 
   const handleLogin = () => {
     if (username.trim() === "" || password.trim() === "") {
       alert("errer");
       return;
     }
+  
 
     postData({ phoneNumber: username, password });
+    setLogin(true);
+    setId(data.userID);
+    console.log(`data : ${data}`);
+    console.log(`id : ${id}`);
   };
 
   return (
@@ -51,8 +57,8 @@ const LoginScreen = () => {
        </>
       )}
       {error && console.log(error) && <Text style={styles.error}>{error}</Text>}
-      {responseData && (
-        <Text>Login Successful{" " + JSON.stringify(responseData)}</Text>
+      {data && (
+        <Text>Login Successful</Text>
       )}
     </View>
   );

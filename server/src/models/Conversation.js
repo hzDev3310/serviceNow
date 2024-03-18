@@ -8,8 +8,9 @@ const MessageSchema = new Schema({
 });
 
 const ConversationSchema = new Schema({
-    users: [String],
-    messages: [MessageSchema] 
+    user1id: String,
+    user2id: String,
+    messages: {type: [MessageSchema] , default:[]}
 });
 
 const ConversationModel = model("Conversation", ConversationSchema);

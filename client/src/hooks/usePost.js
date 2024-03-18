@@ -31,7 +31,7 @@ function usePost(endpoint) {
     }
   };
 
-  return { postData, loading, error, data: responseData };
+  return { postData, loading, error, data :responseData};
 }
 
 export default usePost;

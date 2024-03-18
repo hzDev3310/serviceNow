@@ -1,12 +1,19 @@
-import * as React from 'react';
-import { Appbar } from 'react-native-paper';
+import { Appbar, IconButton } from "react-native-paper";
+import * as React from "react";
+import { Modal, Portal, Text } from "react-native-paper";
+import useNotif from "../store";
 
-const AppBar = () => (
-  <Appbar.Header >
+const AppBar = () => {
+  const {notif, setNotif } = useNotif();
 
-    <Appbar.Content title="ServiceNow" />
-    <Appbar.Action icon="account"/>
-  </Appbar.Header>
-);
+  return (
+    <Appbar.Header>
+      
+      <Appbar.Content title="ServiceNow" />
+
+      <IconButton icon={!notif ? "bell"  : "close"} size={20} onPress={() => setNotif()} />
+    </Appbar.Header>
+  );
+};
 
 export default AppBar;

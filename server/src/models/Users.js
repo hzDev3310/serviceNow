@@ -32,10 +32,6 @@ const userSchema = new Schema({
   email: {
     type: Mail,
   },
-  converations: {
-    type: [String],
-    default: [],
-  },
   service: {
     type: Service,
   },
