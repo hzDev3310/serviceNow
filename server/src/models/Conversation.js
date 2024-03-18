@@ -1,14 +1,16 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const Message = new Schema({
-    sender : String,
-    reciver : String,
-    content : String,
-    date : Date,
-})
+const MessageSchema = new Schema({
+    sender: String,
+    receiver: String, 
+    content: String,
+    date: Date
+});
 
-const Coversation = new Schema({
-    messages: [Message]
-})
-const ConversationModel = model("Conversation", Coversation);
+const ConversationSchema = new Schema({
+    users: [String],
+    messages: [MessageSchema] 
+});
+
+const ConversationModel = model("Conversation", ConversationSchema);
 module.exports = ConversationModel;
