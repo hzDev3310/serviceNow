@@ -1,19 +1,21 @@
-import React from "react";
-import { Button, Text } from "react-native-paper";
-import { useUserID } from "../store";
+// ConversationScreen.js
+import React, { useState } from "react";
+import { View, FlatList } from "react-native";
+
 import { useGet } from "../apis";
+import ChatCard from "../component/ChatCard";
 
 const ConversationScreen = () => {
-  const { id } = useUserID();
-  console.assert(data)
-  const { data, error, loading } = useGet(`/messages/${id}`);
-  return (
-    <>
-      <Text>{JSON.stringify(data)} </Text>
-      <Text>{JSON.stringify(error)} </Text>
-      <Text>{JSON.stringify(loading)} </Text>
 
-    </>
+  const { data } = useGet("/messages/65f45202af0595e661031885");
+  return (
+    <View>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => <ChatCard conversation={item} />}
+      />
+    </View>
   );
 };
 

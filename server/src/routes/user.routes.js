@@ -7,7 +7,7 @@ const {
   } = require("../controller/userController");
   
   const router = require("express").Router();
-
+  router.get("/:id", getServices);
   router.get("/:latitude/:longitude", getServices);
   router.post("/:userId", emproveAccount);
   router.delete("/:userId", removeUser);

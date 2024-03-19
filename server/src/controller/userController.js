@@ -108,6 +108,16 @@ const updateUser = async (req, res) => {
   }
 };
 
+const getuser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await userModel.findById(userId);
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error " +error });}
+}
+
 module.exports = {
   getServices,
   updateUser,

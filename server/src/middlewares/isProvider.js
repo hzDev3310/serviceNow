@@ -1,14 +1,10 @@
 const userModel = require("../models/Users");
 
-const isProvider = async (req, res, next) => {
+const isProviderMiddleware = async (req, res, next) => {
   try {
     const { phoneNumber, code } = req.body;
 
-    if (!phoneNumber) {
-      return res
-        .status(400)
-        .json({ message: "Phone number and code are required" });
-    }
+   
 
     const user = await userModel.findOne({ "phoneNumber.number": phoneNumber });
 
@@ -19,34 +15,24 @@ const isProvider = async (req, res, next) => {
     if (!user.isProvider) {
       if (user.phoneNumber.isVerifiate) {
         next();
-        return null;
-      } else if (!code) {
-        return res.status(400).json({ message: "Code is required" });
       } else if (user.phoneNumber.code === code) {
         await userModel.findOneAndUpdate(
           { "phoneNumber.number": phoneNumber },
           { $set: { "phoneNumber.isVerifiate": true } }
         );
         next();
-        return res
-          .status(200)
-          .json({ message: "Phone number verified successfully" });
       } else {
-        return res.status(400).json({ message: "incorrect code" });
+        return res.status(400).json({ message: "Incorrect code" });
       }
     } else {
       if (user.email.isVerifiate) {
         next();
-        return null;
-      } else if (!code) {
-        return res.status(400).json({ message: "Code is required" });
       } else if (user.email.code === code) {
         await userModel.findOneAndUpdate(
           { "phoneNumber.number": phoneNumber },
           { $set: { "email.isVerifiate": true } }
         );
         next();
-        return res.status(200).json({ message: "Email verified successfully" });
       } else {
         return res.status(400).json({ message: "Email not verified" });
       }
@@ -57,4 +43,4 @@ const isProvider = async (req, res, next) => {
   }
 };
 
-module.exports = isProvider;
+module.exports = isProviderMiddleware;

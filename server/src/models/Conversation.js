@@ -1,16 +1,16 @@
 const { Schema, model } = require("mongoose");
 
-const MessageSchema = new Schema({
+const MessageSchema = new Schema(
+  {
     sender: String,
-    receiver: String, 
     content: String,
-    date: Date
-});
+  },
+  { timestamps: true }
+);
 
 const ConversationSchema = new Schema({
-    user1id: String,
-    user2id: String,
-    messages: {type: [MessageSchema] , default:[]}
+  users :Array,
+  messages: { type: [MessageSchema], default: [] },
 });
 
 const ConversationModel = model("Conversation", ConversationSchema);

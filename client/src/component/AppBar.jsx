@@ -1,7 +1,7 @@
 import { Appbar, IconButton } from "react-native-paper";
 import * as React from "react";
 import { Modal, Portal, Text } from "react-native-paper";
-import useNotif from "../store";
+import {useNotif} from "../store";
 
 const AppBar = () => {
   const {notif, setNotif } = useNotif();

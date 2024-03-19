@@ -5,8 +5,8 @@ const {
 } = require("../controller/messagesController");
 
 const router = require("express").Router();
-router.put("/", createNewConversation);
+router.post("/", createNewConversation);
 router.get("/:id", getConv);
-router.put("/add", addNewMessage);
+router.put("/", addNewMessage);
 
 module.exports = router;

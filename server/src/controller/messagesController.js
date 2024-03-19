@@ -3,8 +3,8 @@ const UserModel = require("../models/Users");
 
 const createNewConversation = async (req, res) => {
   try {
-    const { users1id, users2id } = req.body;
-    const newConversation = new ConversationModel({ users1id ,users2id });
+    const { id1, id2 } = req.body;
+    const newConversation = new ConversationModel({  users : [id1 , id2] });
     await newConversation.save();
     res.status(200).json({ message: "Conversation created successfully" });
   } catch (error) {
@@ -12,6 +12,22 @@ const createNewConversation = async (req, res) => {
     res
       .status(500)
       .json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
+
+const getConv = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const conv = await ConversationModel.find({ users: { $elemMatch: { $eq: id } } });
+
+    if (!conv || conv.length === 0) {
+      return res.status(404).json({ message: "Conversation not found" });
+    }
+    
+    res.status(200).json(conv);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 
@@ -42,19 +58,7 @@ const addNewMessage = async (req, res) => {
   }
 };
 
-const getConv = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const conv = await ConversationModel.find({ $or: [{ user1: id }, { user2: id }] });
 
-    if (!conv || conv.length === 0) {
-      return res.status(404).json({ message: "Conversation not found" });
-    }
 
-    res.status(200).json(conv);
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
-  }
-};
 
 module.exports = { createNewConversation, addNewMessage ,getConv };

@@ -3,8 +3,9 @@ import { AppBar } from "../component/";
 import ServicesScreen from "./ServicesScreen";
 import { Button, Searchbar } from "react-native-paper";
 import { ScrollView, View } from "react-native";
-import useNotif from "../store";
+
 import NotifcationSceen from "./NotifcationSceen";
+import { useNotif } from "../store";
 
 const HomeScreen = () => {
   const { notif } = useNotif();

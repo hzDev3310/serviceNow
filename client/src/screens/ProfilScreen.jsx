@@ -1,11 +1,11 @@
-import React from "react";
 
-import LoginScreen from "./LoginScreen";
+import { Text } from "react-native-paper";
+
 
 const ProfilScreen = () => {
 
-  // return isLogin ? <Text>hamza</Text> : <LoginScreen />;
-  return <LoginScreen />
+  return  <Text>hamza</Text> 
+
 };
 
 export default ProfilScreen;

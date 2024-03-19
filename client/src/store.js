@@ -12,6 +12,11 @@ const useCity = create((set) => ({
   setCityName: (cityName) => set({ cityName }),
 }));
 
+const useLog = create((set) => ({
+  isLogin: false,
+  setLogin: () => set((state) => ({ isLogin: !state.isLogin })),
+}));
+
 
 const useNotif = create((set) => ({
   notif: false,
@@ -22,7 +27,7 @@ const useNotif = create((set) => ({
     })),
 }));
 
-export default useNotif;
 
 
-export { useCity, useNotif , useUserID};
+
+export { useCity, useNotif , useUserID , useLog};

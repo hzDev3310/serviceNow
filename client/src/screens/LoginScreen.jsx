@@ -9,7 +9,9 @@ const LoginScreen = () => {
       
       <Text>{JSON.stringify(error)}</Text>
       <Text>{JSON.stringify(loading)}</Text>
-      <Button onPress={handleLogin} >login</Button>
+      <Button onPress={()=>{
+        handleLogin()
+      }} >login</Button>
     </>
   );
 };
