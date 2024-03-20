@@ -5,6 +5,7 @@ import { useGet } from "../apis";
 import { useNavigation } from "@react-navigation/native";
 
 const ChatCard = ({ conversation }) => {
+
   const navigation = useNavigation();
   const users = conversation.users;
   const userId = "65f45202af0595e661031885";
@@ -17,6 +18,7 @@ const ChatCard = ({ conversation }) => {
   const otherUser = otherUserResponse.data && otherUserResponse.data[0];
 
   const chat = {
+    id : conversation._id,
     senderPic: otherUser ? otherUser.profilPic || " " : " ",
     senderName: otherUser ? otherUser.name || " " : " ",
     otherUserID,

@@ -22,7 +22,7 @@ function useGet(endpoint) {
     };
 
     fetchData();
-  }, [endpoint, url]);
+  }, [data, url ,endpoint]);
 
   return { data, loading, error };
 }
