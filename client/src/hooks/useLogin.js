@@ -11,9 +11,10 @@ const useLogin = (phoneNumber, password, code) => {
     id != "" && seLogin();
   };
   return {
+    responseData,
     handleLogin,
     loading,
-    error: responseData?.message || error,
+    error: responseData?.message || error?.message||null
   };
 };
 
