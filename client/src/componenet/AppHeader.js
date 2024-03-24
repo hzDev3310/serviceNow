@@ -1,16 +1,18 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AppView from "./AppView";
+import AppText from "./AppText";
 const AppHeader = () => {
   return (
-    <View className="w-full flex  flex-row justify-between  bg-slate-200 p-2">
-      <Text className="text-3xl">ServiceNow</Text>
+    <AppView className="w-full flex  flex-row justify-between">
+      <AppText className="text-3xl">ServiceNow</AppText>
       <View>
         <TouchableOpacity>
           <MaterialCommunityIcons name="account" size={40} color="black" />
         </TouchableOpacity>
       </View>
-    </View>
+    </AppView>
   );
 };
 

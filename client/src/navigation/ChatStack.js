@@ -10,7 +10,7 @@ function ChatStack() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="chat" component={ChatScreen} />
+      <Stack.Screen name="chat screen" component={ChatScreen} />
     </Stack.Navigator>
   );
 }

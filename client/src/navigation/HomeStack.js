@@ -8,7 +8,7 @@ function HomeStack() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="home screen" component={HomeScreen} />
     </Stack.Navigator>
   );
 }

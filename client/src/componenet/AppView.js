@@ -5,7 +5,7 @@ import { useDarkMode } from "../store";
 const AppView = ({ children, ...otherProps }) => {
   const { darkMode } = useDarkMode();
   return (
-    <View {...otherProps} className={darkMode && "bg-slate-900"}>
+    <View {...otherProps} className={darkMode && "bg-gray-900"}>
       {children}
     </View>
   );
