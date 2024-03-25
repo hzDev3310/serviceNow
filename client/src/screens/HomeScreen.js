@@ -1,10 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
+
+import { AppHeader, AppServices } from "../componenet";
 const HomeScreen = () => {
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text className="text-blue-700" >Open up App.js to start working on your app!</Text>
-     
+    <View className="flex flex-1 ">
+      <AppHeader />
+      <AppServices />
     </View>
   );
 };
